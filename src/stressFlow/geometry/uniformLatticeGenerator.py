@@ -40,5 +40,5 @@ def generate_uniform_gyroid(resolution=60, t=0.0, size=25.0):
 
 if __name__ == "__main__":
     mesh = generate_uniform_gyroid(resolution=60, t=0.0, size=30.0)
-    mesh.export("data/uniform_gyroid_test.stl")
+    #mesh.export("data/uniform_gyroid_test.stl")
     print("Generated gyroid")
