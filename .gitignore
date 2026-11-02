@@ -1,0 +1,25 @@
+# Python Virtual Environments & Bytecode
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+*.egg-info/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# IDE & Editor Settings
+.vscode/
+.obsidian/workspace
+.obsidian/workspace.json
+
+# Linux / Desktop Metadata
+.directory
+.DS_Store
+
+# Large Output Data / Binary Meshes (Keep git lightweight)
+# Comment this out if you actually want to track small test .stl files
+data/*.stl
+data/*.vtk
