@@ -10,9 +10,10 @@
 #   This file renders any given mesh
 
 import pyvista as pv
-from stressFlow.geometry.uniformLatticeGenerator import generate_uniform_gyroid
+from numpy import pi as pi
+from stressFlow.geometry.TPMS_lattice_generator import generate_TPMS_lattice
 
-mesh = generate_uniform_gyroid(resolution=60, t=0.0, size=30.0)
+mesh = generate_TPMS_lattice(bounds=(-2 * pi, -2 * pi, -2 * pi, 2 * pi, 2 * pi, 2 * pi), resolution=60, t=0.0, size=30.0, spatial_thickness=True)
 
 pv_mesh = pv.wrap(mesh)
 

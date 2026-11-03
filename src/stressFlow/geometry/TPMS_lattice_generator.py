@@ -13,17 +13,26 @@ import numpy as np
 from skimage.measure import marching_cubes
 import trimesh
 
-def generate_uniform_gyroid(resolution=60, t=0.0, size=25.0):
+def generate_TPMS_lattice(bounds=(0,0,0,(2 * np.pi),(2 * np.pi),(2 * np.pi)), resolution=60, t=0.0, size=25.0, spatial_thickness=False):
     """
-    Generates a uniform Gyroid TPMS lattice mesh and returns a trimesh object
+    Generates a TPMS lattice mesh and returns a trimesh object
+
+    Args:
+        bounds (tuple): (x_min, y_min, z_min, x_max, y_max, z_max)
+
     """
-    print("Generating Gyroid field at {resolution}^3 resolution")
+    print(f"Generating lattice at {resolution}^3 resolution")
 
     # Spatial grid mapping
-    x = np.linspace(0, 2 * np.pi, resolution)
-    y = np.linspace(0, 2 * np.pi, resolution)
-    z = np.linspace(0, 2 * np.pi, resolution)
+    x = np.linspace(bounds[0], bounds[3], resolution)
+    y = np.linspace(bounds[1], bounds[4], resolution)
+    z = np.linspace(bounds[2], bounds[5], resolution)
     X, Y, Z = np.meshgrid(x, y, z, indexing='ij')
+
+    # Spatial thickness field function
+    if spatial_thickness:
+        R = np.sqrt(np.pow(X, 2) + np.pow(Y, 2) + np.pow(Z, 2))
+        t = 1 - (0.1 * R)
 
     # Gyroid Implicit Equation cos(x)sin(y) + cos(y)sin(z) + cos(z)sin(x) - t
     field = np.cos(X)*np.sin(Y) + np.cos(Y)*np.sin(Z) + np.cos(Z)*np.sin(X) - t
@@ -38,7 +47,8 @@ def generate_uniform_gyroid(resolution=60, t=0.0, size=25.0):
 
     return mesh
 
+
 if __name__ == "__main__":
-    mesh = generate_uniform_gyroid(resolution=60, t=0.0, size=30.0)
+    mesh = generate_TPMS_lattice(resolution=60, t=0.0, size=30.0)
     #mesh.export("data/uniform_gyroid_test.stl")
     print("Generated gyroid")
