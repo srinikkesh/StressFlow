@@ -11,7 +11,7 @@
 
 import pyvista as pv
 from numpy import pi as pi
-from stressFlow.geometry.TPMS_lattice_generator import generate_TPMS_lattice
+from stressFlow.core.geometry.TPMS_lattice_generator import generate_TPMS_lattice
 
 mesh = generate_TPMS_lattice(bounds=(-2 * pi, -2 * pi, -2 * pi, 2 * pi, 2 * pi, 2 * pi), resolution=60, t=0.0, size=30.0, spatial_thickness=True)
 
